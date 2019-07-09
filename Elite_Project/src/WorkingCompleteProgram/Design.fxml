@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hellofx.Controller">
+   <children>
+      <Button layoutX="2.0" layoutY="1.0" mnemonicParsing="false" onAction="#ImportButtonPressed" prefHeight="17.0" prefWidth="89.0" text="Import Image" />
+      <ImageView fx:id="imageview" fitHeight="330.0" fitWidth="575.0" layoutX="12.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true" />
+      <ComboBox fx:id="comboBox" layoutX="127.0" layoutY="16.0" prefWidth="150.0" />
+      <Label layoutX="300.0" layoutY="23.0" text="Label" fx:id="x" />
+      <Label fx:id="y" layoutX="358.0" layoutY="23.0" text="Label" />
+      <Button layoutX="396.0" layoutY="19.0" mnemonicParsing="false" onAction="#SubmitButtonPressed" text="Submit" />
+      <Label layoutX="310.0" layoutY="4.0" text="X">
+         <font>
+            <Font name="System Bold Italic" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="366.0" layoutY="4.0" text="Y">
+         <font>
+            <Font name="System Bold Italic" size="15.0" />
+         </font>
+      </Label>
+      <Button layoutX="454.0" layoutY="19.0" mnemonicParsing="false" onAction="#ShowButton" text="Show" />
+      <Button layoutX="503.0" layoutY="19.0" mnemonicParsing="false" onAction="#GenerateFiles" text="GenerateFiles" />
+      <Button layoutX="2.0" layoutY="28.0" mnemonicParsing="false" onAction="#ImportCSV" prefHeight="17.0" prefWidth="89.0" text="Import CSV" />
+   </children>
+</AnchorPane>
