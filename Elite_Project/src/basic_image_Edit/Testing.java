@@ -22,13 +22,15 @@ public class Testing {
 	            ){
 	        	
 	        	int i = 0;
-	                for(CSVRecord CSVRecord : CSVParser){
-	        			BufferedImage bufferedImage = ImageIO.read(new File("C:/Users/Prince Sharma/Desktop/Extras/Elite Project/Sample_certi.jpg"));			
+	        	BufferedImage bufferedImage = ImageIO.read(new File("C:/Users/Prince Sharma/Desktop/Extras/Elite Project/Sample_certi.jpg"));
+	                for(CSVRecord CSVRecord : CSVParser){	
+	                	
 	        			Graphics graphics = bufferedImage.getGraphics();
 	        			graphics.setColor(Color.BLACK);
 	        			graphics.setFont(new Font("Microsoft JhengHei UI Light", Font.BOLD, 100));
 	        			String key = CSVRecord.get("Name");
 	        			graphics.drawString(key, 960, 600);
+	                	
 	        			String s = "C:/Users/Prince Sharma/Desktop/Output/out_"+(++i)+".jpg";
 	        			File file = new File(s);
 	        			ImageIO.write(bufferedImage, "jpg", file);

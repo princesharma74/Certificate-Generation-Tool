@@ -19,7 +19,7 @@ public class readCSVfile
         }
         try(
             Reader reader = Files.newBufferedReader(Paths.get(path));
-            CSVParser CSVParser = new CSVParser(reader, CSVFormat.DEFAULT.withHeader("Event", "Year", "Name", "Position", "Course").withSkipHeaderRecord().withIgnoreHeaderCase().withTrim());
+            CSVParser CSVParser = new CSVParser(reader, CSVFormat.DEFAULT.withHeader().withSkipHeaderRecord().withIgnoreHeaderCase().withTrim());
         ){
             for(CSVRecord CSVRecord : CSVParser){
                 String Event = CSVRecord.get("Event");
