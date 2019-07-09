@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hellofx.Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="WorkingCompleteProgram.Controller">
    <children>
       <Button layoutX="2.0" layoutY="1.0" mnemonicParsing="false" onAction="#ImportButtonPressed" prefHeight="17.0" prefWidth="89.0" text="Import Image" />
       <ImageView fx:id="imageview" fitHeight="330.0" fitWidth="575.0" layoutX="12.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true" />

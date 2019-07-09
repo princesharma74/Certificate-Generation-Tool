@@ -10,9 +10,10 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("hellofx.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("Design.fxml"));
         
-        Scene scene = new Scene(root);       
+        Scene scene = new Scene(root);
+        stage.setTitle("Mass Image Editor");
         stage.setScene(scene);
         stage.show();
     }
