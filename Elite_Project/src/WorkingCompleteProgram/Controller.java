@@ -18,33 +18,44 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import javax.imageio.ImageIO;
-import javax.swing.JFileChooser;
-import javax.swing.filechooser.FileSystemView;
 
 import org.apache.commons.csv.*;
 
+import WorkingCompleteProgram.ImageViewer;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Point2D;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 public class Controller implements Initializable{
-	@FXML private ImageView imageview; 
+	@FXML private ImageView imageview, imageview1; 
 	@FXML private ComboBox<String> comboBox;
+	@FXML private ComboBox<String> Fonts;
+	@FXML private ComboBox<String> Weight;
+	@FXML private ComboBox<Integer> size;
 	@FXML private Label x; 
 	@FXML private Label y;
-	private int tempX, tempY; 
 	private List<Integer> tempXarray = new ArrayList<>();
 	private List<Integer> tempYarray = new ArrayList<>();
 	private BufferedReader br;
 	private int j = 0;
 	private List<String> str = new ArrayList<>();
 	private String strImage="", strCSV="";
+	Integer size1[] = {8,9,10,11,12,14,16,18,20,22,24,26,28,36,48,72};
+	ImageViewer img = new ImageViewer();
 	
 	public void DrawCenterAlignedString(String key, int x, int y, Graphics graphics) {
 		int stringLen = (int)graphics.getFontMetrics().getStringBounds(key, graphics).getWidth();
@@ -53,11 +64,53 @@ public class Controller implements Initializable{
 		graphics.drawString(key, x, y);
 	}
 	
+	PreviewController pc = new PreviewController();
+	
+	public void PreviewButtonPressed(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("Preview.fxml"));
+        Parent tableViewParent = loader.load();
+        
+        Scene tableViewScene = new Scene(tableViewParent);
+        
+        //access the controller and call a method
+        PreviewController pcontroller = loader.getController();
+        
+        //creating an edited image
+        BufferedImage bufferedImage = ImageIO.read(new File(strImage));
+        Graphics graphics = bufferedImage.getGraphics();
+		graphics.setColor(Color.BLACK);
+		String str = Weight.getValue();		        			
+		int w = set.Font(str); 
+		Font font = new Font(Fonts.getValue(), w, (Integer) size.getValue());
+		graphics.setFont(font);
+		String key = "Sample Text";
+		Point2D point = img.GetThePoint();
+		int X = (int)point.getX();
+		int Y = (int)point.getY();
+		
+		DrawCenterAlignedString(key, X, Y, graphics);
+		
+        Image image1 = SwingFXUtils.toFXImage(bufferedImage, null);
+        
+        pcontroller.ImageViewSETTER(image1);
+        
+        //This line gets the Stage information
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+        
+        window.setScene(tableViewScene);
+        window.show();
+	}
+	
+	setComboBoxFontFamilies set = new setComboBoxFontFamilies();
+	
 	public BufferedImage ImageEdit(String header, BufferedImage bufferedImage, int x, int y, CSVRecord CSVRecord){
 		Graphics graphics = bufferedImage.getGraphics();						
 		        			graphics.setColor(Color.BLACK);
-		        			graphics.setFont(new Font("Microsoft JhengHei UI Light", Font.BOLD, 100));//For Check 1
-		        			//graphics.setFont(new Font("Calibri",Font.BOLD,  14));//For Check 2
+		        			String str = Weight.getValue();		        			
+		        			int w = set.Font(str); 
+		        			Font font = new Font(Fonts.getValue(), w, (Integer) size.getValue());
+		        			graphics.setFont(font);
 		        			String key = CSVRecord.get(header);
 		        			DrawCenterAlignedString(key, x, y, graphics);
 		return bufferedImage;
@@ -67,12 +120,11 @@ public class Controller implements Initializable{
                 Reader reader = Files.newBufferedReader(Paths.get(strCSV));
                 CSVParser CSVParser = new CSVParser(reader, CSVFormat.DEFAULT.withFirstRecordAsHeader().withIgnoreHeaderCase().withTrim());
             ){
-        	
         	int i = 0;
         	BufferedImage bufferedImage = ImageIO.read(new File(strImage));
                 for(CSVRecord CSVRecord : CSVParser){	
         			for(int j = 0; j<str.size(); j++) {
-        				bufferedImage = ImageEdit(str.get(j), bufferedImage, tempXarray.get(j), tempYarray.get(j), CSVRecord);
+        				bufferedImage = ImageEdit(str.get(j), bufferedImage, tempXarray.get(j), tempYarray.get(j), CSVRecord);        			
         			}
         			String s = "C:/Users/Prince Sharma/Desktop/Output/out_"+(++i)+".jpg";
         			File file = new File(s);
@@ -85,31 +137,32 @@ public class Controller implements Initializable{
             }
 	}
 	
-	public String FileChooser() {
+	
+	
+	public String FileChooser1(Stage stage) {
 		String path = "";
-        JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
-        int returnValue = jfc.showOpenDialog(null);
-        if (returnValue == JFileChooser.APPROVE_OPTION){
-            File selectedFile = jfc.getSelectedFile();  
-            path =  selectedFile.getAbsolutePath();
-            
-        }
-        return path;
+		FileChooser fileChooser = new FileChooser();
+		File selectedFile = fileChooser.showOpenDialog(stage);
+		path = selectedFile.getAbsolutePath();
+		return path;
 	}
 	public void ImportCSV() {
-		strCSV = FileChooser();
+		strCSV = FileChooser1(null);
 		ComboBoxSETTER();
 	}
 	
 	public void SubmitButtonPressed(ActionEvent event) {		
 		String SelectedHeader = comboBox.getValue();
-		tempXarray.add(tempX);
-		tempYarray.add(tempY);
 		str.add(SelectedHeader);
 		//this.x.setText(Integer.toString(tempX));
 		//this.y.setText(Integer.toString(tempY));
 		j++;
-		System.out.println("Submit Button Pressed!-"+j+"\ntempX: "+tempX+"\ntempY: "+tempY+"\n");		
+		Point2D point = img.GetThePoint();
+		int X = (int)point.getX();
+		int Y = (int)point.getY();
+		tempXarray.add(X);
+		tempYarray.add(Y);
+		System.out.println("Submit Button Pressed!-"+j+"\ntempX: "+X+"\ntempY: "+Y+"\n");		
 	}
 	public void ShowButton(ActionEvent event) {
 		for(int i =0; i<str.size(); i++) {
@@ -118,33 +171,13 @@ public class Controller implements Initializable{
 	}
 	
 	public void ImportButtonPressed(ActionEvent event){
-		strImage = FileChooser();
-		Image image = new Image("file:"+strImage);
-		imageview.setImage(image);
-		EventHandler<MouseEvent> eventHandler = new EventHandler<MouseEvent>() {
-
-			@Override
-			public void handle(MouseEvent e) {
-				int getX= (int)(e.getX()*(image.getHeight()/330));
-				int getY= (int)(e.getY()*(image.getHeight()/330));
-				if (getX>image.getWidth()) {
-					getX = (int)image.getWidth();
-				}
-				else if(getY>image.getHeight()){
-					getY = (int)image.getHeight();
-				}
-				tempX = getX;
-				tempY = getY;
-				x.setText(Integer.toString(tempX));
-				y.setText(Integer.toString(tempY));
-				System.out.println("["+getX+" , "+getY+"]");
-				
-			}
-			
-		};
-		
-		imageview.addEventFilter(MouseEvent.MOUSE_CLICKED, eventHandler);
+		strImage = FileChooser1(null);
+		System.out.println(strImage);
+		img.ImageViewSETTER(imageview);
+		img.GetImageCoordinates(strImage);
+		img.LabelSETTER(x, y);
 	}
+	
 	public void ComboBoxSETTER() {
 		// TODO Auto-generated method stub
 		String columns[] = null;
@@ -174,6 +207,17 @@ public class Controller implements Initializable{
 		x.setText("");
 		y.setText("");		
 		comboBox.setPromptText("Choose Header");		
+	    String weight[] = {"BOLD", "ITALIC", "PLAIN"}; 
+
+
+	    ObservableList<String> list =  FXCollections.observableArrayList(weight);
+	    setComboBoxFontFamilies set = new setComboBoxFontFamilies();	    
+	    ObservableList<String> list1 = set.setComboBox();
+	    ObservableList<Integer> list2 =  FXCollections.observableArrayList(size1);
+	    
+	    Fonts.setItems(list1);
+	    Weight.setItems(list);
+	    size.setItems(list2);
 	}
 	
 	
