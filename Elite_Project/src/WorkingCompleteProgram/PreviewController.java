@@ -1,5 +1,5 @@
 package WorkingCompleteProgram;
-
+/*
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -39,3 +39,4 @@ public class PreviewController implements Initializable{
 	}
 
 }
+*/
