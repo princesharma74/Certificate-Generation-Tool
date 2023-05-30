@@ -22,15 +22,27 @@ Prince Sharma
 Ankit Negi
 
 ## Contents
-1. [Introduction](#introduction)
-2. [Tools and Technology Used in Building the Project](#tools-and-technology-used-in-building-the-project)
-3. [Design of the Software](#design-of-the-software)
-4. [GUI Design of the Software](#gui-design-of-the-software)
-5. [Back End Processing](#back-end-processing)
-6. [Coding](#coding)
-7. [Future Scope](#future-scope)
-8. [User Manual](#user-manual)
-9. [References](#references)
+- [Elite\_Project](#elite_project)
+- [Software for Editing Multiple Image Document](#software-for-editing-multiple-image-document)
+  - [Acharya Narendra Dev College](#acharya-narendra-dev-college)
+  - [Acknowledgment](#acknowledgment)
+  - [Contents](#contents)
+  - [Introduction](#introduction)
+    - [Overview](#overview)
+    - [Objective](#objective)
+  - [Tools and Technology Used in Building the Project](#tools-and-technology-used-in-building-the-project)
+    - [Tools and Technology used](#tools-and-technology-used)
+    - [Minimum Hardware and Software Requirement](#minimum-hardware-and-software-requirement)
+  - [Design of the Software](#design-of-the-software)
+    - [Design Constraints](#design-constraints)
+    - [System Design](#system-design)
+      - [Level 1 DFD](#level-1-dfd)
+    - [Component Design and Module Description](#component-design-and-module-description)
+    - [GUI Design of the Software](#gui-design-of-the-software)
+    - [Back End Processing](#back-end-processing)
+    - [Coding](#coding)
+    - [Future Scope](#future-scope)
+    - [User Manual](#user-manual)
 
 ## Introduction
 The use of computers has made cumbersome, repetitive, and time-consuming tasks a lot easier, efficient, and productive. This project aims to automate customized documents by generating bulk certificates customized with the awardee information on each certificate.
@@ -64,7 +76,6 @@ The software's functioning is explained using a Level 1 Data Flow Diagram (DFD).
 #### Level 1 DFD
 ![Level 1 DFD](dfd.png)
 
-### Component Design and Module Description
 ### Component Design and Module Description
 The software is divided into several components and modules to ensure modularity and maintainability. Here are the main components and their descriptions:
 
