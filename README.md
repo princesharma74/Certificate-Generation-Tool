@@ -119,15 +119,10 @@ The software can be further enhanced and extended with the following features:
 - Support for additional image formats and export options.
 - Localization and multi-language support for catering to a wider user base.
 
-
-
+### User Manual
 - Install latest version vs code or update it if you have it already.
 - Install java extension pack.
-- Follow the steps in https://www.youtube.com/watch?v=H67COH9F718 during this step enable set java_home variable that way you wont have to add it manually
-
-
-
-go till last where he creates a single program. Replace that single program using the code given in src file we have.
-
-go to https://commons.apache.org/proper/commons-csv/download_csv.cgi and download commons-csv-1.8-bin.zip.
+- Follow the steps [here](https://www.youtube.com/watch?v=H67COH9F718) during this step enable set java_home variable that way you wont have to add it manually
+- go till last where he creates a single program. Replace that single program using the code given in src file we have.
+- go to https://commons.apache.org/proper/commons-csv/download_csv.cgi and download commons-csv-1.8-bin.zip.
 extract the file and add 2 new jars commons-csv-1.8-sources and commons-csv-1.8 to the project and run the main.
